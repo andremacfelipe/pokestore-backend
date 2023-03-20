@@ -6,6 +6,8 @@ import mongoose from "mongoose"
 const app = express()
 import cors from "cors"
 
+import registerRouter from "./routes/registerRouter.js";
+
 
 app.use(cors())
 
@@ -13,6 +15,9 @@ mongoose.set("strictQuery",true)
 mongoose.connect(process.env.DB_CONNECTION_URL)
 mongoose.connection.once("open",() => console.log("Database Open"))
 
+
+
+app.use("/api",registerRouter)
 
 
 

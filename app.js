@@ -7,6 +7,7 @@ const app = express()
 import cors from "cors"
 
 import registerRouter from "./routes/registerRouter.js";
+import loginRouter from "./routes/loginRouter.js";
 
 
 app.use(cors())
@@ -18,6 +19,7 @@ mongoose.connection.once("open",() => console.log("Database Open"))
 
 
 app.use("/api",registerRouter)
+app.use("/api",loginRouter)
 
 
 

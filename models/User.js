@@ -6,6 +6,7 @@ const userSchema = mongoose.Schema({
     email:{type:String,required:true,minlength:5,maxlength:200},
     password:{type:String,required:true,minlength:8,},
     purchases:{type:Array,default:[]},
+    credits:{type:Number,default:0},
     roles:{type:Array,default:["user"]},
     
 })

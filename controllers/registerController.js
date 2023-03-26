@@ -17,7 +17,7 @@ const registerController = async (req,res) => {
     }else{
         try {
             const user = new User({
-                fullname: req.body.fullname,
+                username: req.body.username,
                 email:req.body.email,
                 password:bcryptjs.hashSync(req.body.password)
             })
@@ -42,7 +42,7 @@ const registerController = async (req,res) => {
 
 const validateRegisterInputs = (data) => {
     const Schema = Joi.object({
-        fullname:Joi.string().required().min(5).max(500),
+        username:Joi.string().required().min(2).max(500),
         email:Joi.string().required().min(5).max(200),
         password:Joi.string().required().min(8)
     })

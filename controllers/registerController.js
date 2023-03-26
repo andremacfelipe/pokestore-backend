@@ -14,9 +14,9 @@ const registerController = async (req, res) => {
     const currentUserName = await User.findOne({ username: req.body.username })
 
     if (currentUserEmail) {
-        return res.status(400).json({ message: "Email already in use" })
+        return res.status(400).json({ message: "Email already in use", path:"email" })
     } else if (currentUserName) {
-        return res.status(400).json({ message: "Username unavailable" })
+        return res.status(400).json({ message: "Username unavailable", path:"username" })
     }
     else {
         try {

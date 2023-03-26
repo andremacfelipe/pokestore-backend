@@ -18,7 +18,7 @@ const loginController = async (req,res) => {
     if(bcryptjs.compareSync(req.body.password,currentUser.password)){
         const token = await jsonwebtoken.sign({
             userEmail:currentUser.email,
-            userFullName:currentUser.fullName
+            username:currentUser.username
         },
         process.env.TOKEN_PRIVATE_KEY,
 

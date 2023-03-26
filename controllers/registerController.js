@@ -13,10 +13,10 @@ const registerController = async (req, res) => {
     const currentUserEmail = await User.findOne({ email: req.body.email })
     const currentUserName = await User.findOne({ username: req.body.username })
 
-    if (currentUserEmail) {
-        return res.status(400).json({ message: "Email already in use", path:"email" })
-    } else if (currentUserName) {
+    if (currentUserName) {
         return res.status(400).json({ message: "Username unavailable", path:"username" })
+    } else if (currentUserEmail) {
+        return res.status(400).json({ message: "Email already in use", path:"email" })
     }
     else {
         try {

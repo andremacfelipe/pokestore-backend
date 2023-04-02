@@ -8,6 +8,7 @@ import cors from "cors"
 
 import registerRouter from "./routes/registerRouter.js";
 import loginRouter from "./routes/loginRouter.js";
+import validateSessionRouter from "./routes/validateSessionRouter.js";
 
 
 app.use(cors())
@@ -20,6 +21,7 @@ mongoose.connection.once("open",() => console.log("Database Open"))
 
 app.use("/api",registerRouter)
 app.use("/api",loginRouter)
+app.use("/api",validateSessionRouter)
 
 
 

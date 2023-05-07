@@ -6,9 +6,9 @@ import mongoose from "mongoose"
 const app = express()
 import cors from "cors"
 
-import registerRouter from "./routes/registerRouter.js";
-import loginRouter from "./routes/loginRouter.js";
-import validateSessionRouter from "./routes/validateSessionRouter.js";
+import registerRouter from "./routes/User/registerRouter.js";
+import loginRouter from "./routes/User/loginRouter.js";
+import validateSessionRouter from "./routes/User/validateSessionRouter.js";
 
 
 app.use(cors())

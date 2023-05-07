@@ -12,6 +12,7 @@ const PokemonSchema = mongoose.Schema({
     pokemonBaseDefense:{type:Number,required:true},
     pokemonTypes:{type:Array,default:[]},
     pokemonPicSrc:{type:String,required:true},
+    createdUnits:{type:Array,default:[]}
 })
 
 export default mongoose.model("Pokemon",PokemonSchema)

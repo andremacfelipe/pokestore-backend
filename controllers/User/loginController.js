@@ -1,7 +1,7 @@
 import bcryptjs from "bcryptjs"
 import jsonwebtoken from "jsonwebtoken"
 import Joi from "joi"
-import User from "../models/User/User.js"
+import User from "../../models/User/User.js"
 
 
 const loginController = async (req,res) => {

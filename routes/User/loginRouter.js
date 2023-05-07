@@ -1,5 +1,5 @@
 import { Router,json as jsonBodyParser } from "express";
-import loginController from "../../controllers/loginController.js";
+import loginController from "../../controllers/User/loginController.js";
 
 const loginRouter = Router()
 

@@ -1,4 +1,4 @@
-import User from "../models/User.js"
+import User from "../models/User/User.js"
 import bcryptjs from "bcryptjs"
 import Joi from "joi"
 

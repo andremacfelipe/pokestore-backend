@@ -1,5 +1,5 @@
 import { Router, json as jsonBodyParser } from "express";
-import { validateSessionController } from "../../controllers/validateSessionController.js";
+import { validateSessionController } from "../../controllers/User/validateSessionController.js";
 
 const validateSessionRouter = Router()
 

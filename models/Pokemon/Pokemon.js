@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 
 const PokemonSchema = mongoose.Schema({
     pokemonName:{type:String,required:true},
+    pokemonPokedexIndex:{type:Number,required:true},
     pokemonHeight:{type:Number, required:true,},
     pokemonWeight:{type:Number, required:true},
     pokemonBaseHp:{type:Number,required:true},

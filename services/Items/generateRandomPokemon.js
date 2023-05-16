@@ -27,7 +27,7 @@ const generateRandomPokemon = async (req, res) => {
             ItemTypeCode:sortedPokemonType._id,
             ItemName:sortedPokemonType.pokemonName,
             ItemPic:sortedPokemonType.pokemonPicSrc,
-            ItemOwner:{id:currentUser._id}
+            ItemOwner:currentUser._id
         })
         const savedPoke = await newPokemonItem.save()
 
@@ -62,7 +62,7 @@ const generateRandomPokemon = async (req, res) => {
 
 
     } catch (error) {
-        res.status(444).json({ message: "An error occured" })
+        res.status(444).json({ message: error})
     }
 }
 

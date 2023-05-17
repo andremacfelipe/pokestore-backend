@@ -33,22 +33,12 @@ const generateRandomPokemon = async (req, res) => {
 
         sortedPokemonType.createdUnits.push({
             itemId:savedPoke._id,
-            createdAt:Date.now,
-            ownerHistory:[{id:currentUser._id}],
-            currentOwner:{id:currentUser._id,username:currentUser.username}, 
-
+            createdAt:Date.now(),
+            ownerHistory:[currentUser._id],
         })
 
         await sortedPokemonType.save()
         
-        currentUser.inventory.push({
-            id:savedPoke._id,
-            ItemType:savedPoke.ItemType,
-            ItemName:savedPoke.ItemName,
-            ItemPic:savedPoke.ItemPic
-        })
-
-        await currentUser.save() 
         
 
 

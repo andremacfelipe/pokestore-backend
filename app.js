@@ -6,7 +6,8 @@ import mongoose from "mongoose"
 const app = express()
 import cors from "cors"
 
-import registerRouter from "./routes/User/registerRouter.js";
+import { userRouter } from "./routes/User/User.js";
+
 import loginRouter from "./routes/User/loginRouter.js";
 import validateSessionRouter from "./routes/User/validateSessionRouter.js";
 
@@ -24,8 +25,8 @@ mongoose.connect(process.env.DB_CONNECTION_URL)
 mongoose.connection.once("open",() => console.log("Database Open"))
 
 
+app.use("/api",userRouter)
 
-app.use("/api",registerRouter)
 app.use("/api",loginRouter)
 app.use("/api",validateSessionRouter)
 

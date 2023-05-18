@@ -7,5 +7,9 @@ const userRouter = Router()
 userRouter.post("/register",jsonBodyParser(),registerController)
 
 
+//Login
+userRouter.post("/login",jsonBodyParser(),loginController)
+
+
 
 export {userRouter}

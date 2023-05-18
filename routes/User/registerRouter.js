@@ -1,5 +1,5 @@
 import { Router,json as jsonBodyParser } from "express";
-import registerController from "../../controllers/User/registerController.js";
+import { registerController } from "../../controllers/User/User.js";
 
 
 const registerRouter = Router()

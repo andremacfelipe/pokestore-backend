@@ -62,7 +62,7 @@ const loginController = async (req, res) => {
 
             {
                 algorithm: "HS512",
-                expiresIn: 60
+                expiresIn: 60 * 3 
             })
 
         return res.json({ USER_TOKEN: token })

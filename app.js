@@ -9,10 +9,7 @@ import cors from "cors"
 import { userRouter } from "./routes/User/User.js";
 
 
-import validateSessionRouter from "./routes/User/validateSessionRouter.js";
-
 //dev_scripts_bellow
-
 // import { writePokemonSpeciesOnDb } from "./dev_scripts/writePokemonSpeciesOnDb.js";
 
 
@@ -26,7 +23,7 @@ mongoose.connection.once("open",() => console.log("Database Open"))
 
 
 app.use("/api",userRouter)
-app.use("/api",validateSessionRouter)
+
 
 
 

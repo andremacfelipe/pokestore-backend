@@ -7,7 +7,6 @@ import { getAllUsers } from "../../controllers/Admin/Admin.js";
 
 import CaseRouter from "../Case/Case.js";
 
-// import { getAvailablePokemonSpecies, createNewGenericCase } from "../../controllers/Case/Case.js";
 
 const AdminRouter = Router()
 

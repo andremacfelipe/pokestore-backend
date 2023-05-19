@@ -25,6 +25,12 @@ mongoose.connection.once("open",() => console.log("Database Open"))
 app.use("/api",userRouter)
 
 
+// Error-handling
+app.use("*",(req,res) => {
+    res.status(404).json({message:"Not Found!"})
+})
+
+
 
 
 app.listen(process.env.PORT,() => {

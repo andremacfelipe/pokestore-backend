@@ -7,6 +7,7 @@ const app = express()
 import cors from "cors"
 
 import { userRouter } from "./routes/User/User.js";
+import AdminRouter from "./routes/Admin/Admin.js";
 
 
 //dev_scripts_bellow
@@ -23,6 +24,8 @@ mongoose.connection.once("open",() => console.log("Database Open"))
 
 
 app.use("/api",userRouter)
+
+app.use("/admin",AdminRouter)
 
 
 // Error-handling

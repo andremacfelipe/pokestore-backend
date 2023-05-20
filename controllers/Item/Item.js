@@ -7,7 +7,7 @@ const createNewItem = async (currentUserId,name) => {
 
     const Species = await Pokemon.findOne({pokemonName:name})
 
-    if (!Species) throw Error("Species not found!")
+    if (!Species) throw Error(`Species not found! ${name}`)
 
     try {
         const item = new Item({

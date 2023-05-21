@@ -3,7 +3,6 @@ import User from "../../models/User/User.js";
 import Case from "../../models/Case/Case.js";
 
 import { createNewItem } from "../Item/Item.js";
-import { writeCreatedUnits } from "../Pokemon/Pokemon.js";
 
 
 
@@ -25,7 +24,6 @@ const openGenericCase = async (req, res) => {
         const sortedPoke = currentCase.content[sortedIndex]
 
         const newPokemonItem = await createNewItem(currentUser._id,sortedPoke)
-        await writeCreatedUnits(sortedPoke,newPokemonItem._id)
 
         return res.status(201).json(newPokemonItem)
 

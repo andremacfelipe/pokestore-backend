@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 //Model for PokemonSpecies
 
-const PokemonSchema = mongoose.Schema({
+const pokemonSchema = mongoose.Schema({
     pokemonName:{type:String,required:true},
     pokemonPokedexIndex:{type:Number,required:true},
     pokemonHeight:{type:Number, required:true,},
@@ -12,7 +12,6 @@ const PokemonSchema = mongoose.Schema({
     pokemonBaseDefense:{type:Number,required:true},
     pokemonTypes:{type:Array,default:[]},
     pokemonPicSrc:{type:String,required:true},
-    createdUnits:{type:Array,default:[]}
 })
 
-export default mongoose.model("Pokemon",PokemonSchema)
+export default mongoose.model("Pokemon",pokemonSchema)

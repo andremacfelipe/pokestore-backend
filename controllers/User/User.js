@@ -3,6 +3,7 @@ import bcryptjs from "bcryptjs"
 import jsonwebtoken from "jsonwebtoken"
 import { validateRegisterInputs, validateLoginInputs } from "./validate/validateAuthInputs.js"
 
+import { openCase } from "../Case/Case.js"
 
 
 const registerController = async (req, res) => {
@@ -71,7 +72,19 @@ const loginController = async (req, res) => {
     }
 }
 
+const purchaseCase = async (req,res) => {
+    const { userId } = req.body.userData
+    const caseId = req.query.id
+
+    try {
+        const sortedItem = await openCase(userId,caseId)
+        return res.status(201).json(sortedItem)
+    } catch (err) {
+        return res.status(400).json(err)
+    }
+}
 
 
 
-export { registerController, loginController }
+
+export { registerController, loginController, purchaseCase }

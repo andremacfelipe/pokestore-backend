@@ -6,6 +6,8 @@ import { validateUserAction } from "../../middlewares/validate/User/validateUser
 import { validateUserCredits } from "../../middlewares/validate/Case/validateUserCredits.js";
 import { validateCaseId } from "../../middlewares/validate/Case/validateCaseId.js";
 
+import { getAvailableCases,getCase } from "../../controllers/Case/Case.js";
+
 import { purchaseCase } from "../../controllers/User/User.js";
 
 
@@ -19,6 +21,10 @@ userRouter.post("/register",jsonBodyParser(),registerController)
 userRouter.post("/login",jsonBodyParser(),loginController)
 userRouter.get("/session/validate",jsonBodyParser(),validateSession)
 
+
+//Cases
+userRouter.get("/case",getAvailableCases)
+userRouter.get("/case/:id",getCase)
 
 
 //Purchase

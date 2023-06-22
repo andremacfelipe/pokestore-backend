@@ -25,25 +25,25 @@ const openCase = async (userId, caseId) => {
 
 
         // Create the new item in the db
-        const Species = await Pokemon.findOne({pokemonName:sortedPoke})
+        const Species = await Pokemon.findOne({ pokemonName: sortedPoke })
         const item = new Item({
             itemType: "Pokemon",
             itemTypeCode: Species._id,
             itemName: Species.pokemonName,
             itemPic: Species.pokemonPicSrc,
             itemOwner: currentUser._id,
-            ownerHistory:[currentUser._id]
+            ownerHistory: [currentUser._id]
         })
         const createdItem = await item.save()
-        
+
         //Discount user credits
         currentUser.credits -= Number(currentCase.price)
         await currentUser.save()
-        
+
         //Add the new purchase to the currentUser
         currentUser.purchases.push({
-            itemId:item._id,
-            date:Date.now()
+            itemId: item._id,
+            date: Date.now()
         })
         await currentUser.save()
 
@@ -61,4 +61,42 @@ const openCase = async (userId, caseId) => {
 }
 
 
-export { openCase }
+const getAvailableCases = async (req, res) => {
+    const cases = await Case.find()
+    const caseList = cases.map((item) => {
+        return {
+            id: item._id,
+            name: item.name,
+            price: item.price,
+            content: item.content
+        }
+    })
+    return res.status(200).json(caseList)
+
+}
+
+const getCase = async (req, res) => {
+
+    const caseId = req.params.id
+
+    try {
+        const currentCase = await Case.findById(caseId)
+
+        if (!currentCase) {
+            throw new Error("Not Found!")
+        } else {
+            return res.status(200).json({
+                id: currentCase.id,
+                name: currentCase.name,
+                price: currentCase.price,
+                content: currentCase.content
+            })
+        }
+    } catch (err) {
+        return res.status(404).json({ message: "Not found!" })
+    }
+
+}
+
+
+export { openCase, getAvailableCases, getCase }

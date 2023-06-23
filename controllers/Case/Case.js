@@ -68,6 +68,7 @@ const getAvailableCases = async (req, res) => {
             id: item._id,
             name: item.name,
             price: item.price,
+            image:item.image,
             content: item.content
         }
     })
@@ -89,6 +90,7 @@ const getCase = async (req, res) => {
                 id: currentCase.id,
                 name: currentCase.name,
                 price: currentCase.price,
+                image:currentCase.image,
                 content: currentCase.content
             })
         }

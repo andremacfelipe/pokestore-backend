@@ -59,6 +59,7 @@ const createNewGenericCase = async (req,res) => {
         name,
         price,
         content,
+        image
     } = req.body
 
     try {
@@ -66,6 +67,7 @@ const createNewGenericCase = async (req,res) => {
             name,
             price,
             content,
+            image
         })
 
         const newGenericCase = await genericCase.save()

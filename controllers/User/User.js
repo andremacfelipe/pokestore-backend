@@ -1,4 +1,6 @@
 import User from "../../models/User/User.js"
+import Pokemon from "../../models/Pokemon/Pokemon.js"
+
 import bcryptjs from "bcryptjs"
 import jsonwebtoken from "jsonwebtoken"
 import { validateRegisterInputs, validateLoginInputs } from "./validate/validateAuthInputs.js"
@@ -63,7 +65,7 @@ const loginController = async (req, res) => {
 
             {
                 algorithm: "HS512",
-                expiresIn: 60 * 3 
+                expiresIn: 60 * 10
             })
 
         return res.json({ USER_TOKEN: token })
@@ -78,9 +80,15 @@ const purchaseCase = async (req,res) => {
 
     try {
         const sortedItem = await openCase(userId,caseId)
-        return res.status(201).json(sortedItem)
+        const matchItem = await Pokemon.findById(sortedItem.itemTypeCode)
+
+        return res.status(201).json({
+            item:sortedItem,
+            match:matchItem
+            
+        })
     } catch (err) {
-        return res.status(400).json(err)
+        return res.status(400).json(err.message)
     }
 }
 

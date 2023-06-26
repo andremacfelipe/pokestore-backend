@@ -6,8 +6,18 @@ import mongoose from "mongoose"
 const app = express()
 import cors from "cors"
 
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+
+
 import { userRouter } from "./routes/User/User.js";
 import AdminRouter from "./routes/Admin/Admin.js";
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 
 
 //dev_scripts_bellow
@@ -26,6 +36,9 @@ mongoose.connection.once("open",() => console.log("Database Open"))
 app.use("/api",userRouter)
 
 app.use("/admin",AdminRouter)
+
+//Images
+app.use("/public",express.static(path.join(__dirname,"public")))
 
 
 // Error-handling

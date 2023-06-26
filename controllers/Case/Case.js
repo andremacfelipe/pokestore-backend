@@ -82,6 +82,20 @@ const getCase = async (req, res) => {
 
     try {
         const currentCase = await Case.findById(caseId)
+        const caseContent = await Pokemon.find({pokemonName:{$in:currentCase.content}})
+        const filteredCaseContent = caseContent.map((item) => {
+            return {
+                pokemonName:item.pokemonName,
+                pokemonPokedexIndex:item.pokemonPokedexIndex,
+                pokemonHeight:item.pokemonHeight,
+                pokemonWeight:item.pokemonWeight,
+                pokemonBaseHp:item.pokemonBaseHp,
+                pokemonBaseAttack:item.pokemonBaseAttack,
+                pokemonBaseDefense:item.pokemonBaseDefense,
+                pokemonTypes:item.pokemonTypes,
+                pokemonPicSrc:item.pokemonPicSrc
+            }   
+        })
 
         if (!currentCase) {
             throw new Error("Not Found!")
@@ -91,7 +105,7 @@ const getCase = async (req, res) => {
                 name: currentCase.name,
                 price: currentCase.price,
                 image:currentCase.image,
-                content: currentCase.content
+                content: filteredCaseContent
             })
         }
     } catch (err) {

@@ -28,7 +28,7 @@ userRouter.get("/case/:id",getCase)
 
 
 //Purchase
-userRouter.post("/purchase/case",jsonBodyParser(),validateUserAction,validateUserCredits,validateCaseId,purchaseCase)
+userRouter.post("/purchase/case",jsonBodyParser(),validateUserAction,validateCaseId,validateUserCredits,purchaseCase)
 
 
 

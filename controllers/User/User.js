@@ -1,5 +1,6 @@
 import User from "../../models/User/User.js"
 import Pokemon from "../../models/Pokemon/Pokemon.js"
+import Item from "../../models/Item/Item.js"
 
 import bcryptjs from "bcryptjs"
 import jsonwebtoken from "jsonwebtoken"
@@ -74,18 +75,18 @@ const loginController = async (req, res) => {
     }
 }
 
-const purchaseCase = async (req,res) => {
+const purchaseCase = async (req, res) => {
     const { userId } = req.body.userData
     const caseId = req.query.id
 
     try {
-        const sortedItem = await openCase(userId,caseId)
+        const sortedItem = await openCase(userId, caseId)
         const matchItem = await Pokemon.findById(sortedItem.itemTypeCode)
 
         return res.status(201).json({
-            item:sortedItem,
-            match:matchItem
-            
+            item: sortedItem,
+            match: matchItem
+
         })
     } catch (err) {
         return res.status(400).json(err.message)
@@ -94,5 +95,42 @@ const purchaseCase = async (req,res) => {
 
 
 
+const getUserInventory = async (req, res) => {
+    const userId = req.params.id
 
-export { registerController, loginController, purchaseCase }
+    try {
+        const userInventory = await Item.find({ itemOwner: userId })
+
+        return res.status(200).json(userInventory)
+
+
+
+    } catch (err) {
+        return res.status(404).json({ message: "Not found!" })
+    }
+}
+
+const getItemInfo = async (req, res) => {
+    const itemId = req.params.id
+
+    try {
+        const currentItem = await Item.findById(itemId)
+        if (!currentItem) throw new Error("Not Found!")
+
+        if (currentItem.itemType === "Pokemon") {
+            const itemInfo = await Pokemon.findOne({ pokemonName: currentItem.itemName })
+            return res.status(200).json({
+                currentItem,
+                itemInfo
+            })
+        }
+
+    } catch (err) {
+        return res.status(404).json({ message: "Not found!" })
+    }
+}
+
+
+
+
+export { registerController, loginController, purchaseCase, getUserInventory, getItemInfo }

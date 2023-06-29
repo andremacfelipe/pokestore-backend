@@ -15,7 +15,7 @@ const registerController = async (req, res) => {
 
     if (error) return res.status(400).json(error.details)
 
-    const currentUserEmail = await User.findOne({ email: req.body.email })
+    const currentUserEmail = await User.findOne({ email: req.body.email.toLowerCase() })
     const currentUserName = await User.findOne({ username: req.body.username })
 
     if (currentUserName) {
@@ -27,7 +27,7 @@ const registerController = async (req, res) => {
         try {
             const user = new User({
                 username: req.body.username,
-                email: req.body.email,
+                email: req.body.email.toLowerCase(),
                 password: bcryptjs.hashSync(req.body.password)
             })
             await user.save()
@@ -52,7 +52,7 @@ const loginController = async (req, res) => {
 
     if (error) return res.status(400).json(defaultLoginErrorMessage)
 
-    const currentUser = await User.findOne({ email: req.body.email })
+    const currentUser = await User.findOne({ email: req.body.email.toLowerCase() })
 
     if (!currentUser) return res.status(400).json(defaultLoginErrorMessage)
 

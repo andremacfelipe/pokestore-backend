@@ -12,6 +12,9 @@ const ItemSchema = mongoose.Schema({
             type: Boolean,
             default: false,
         },
+        price:{
+            type:Number,
+        }
     },
     createdAt: { type: Date, default: Date.now }
 })

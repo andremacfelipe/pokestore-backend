@@ -41,9 +41,11 @@ const openCase = async (userId, caseId) => {
         await currentUser.save()
 
         //Add the new purchase to the currentUser
-        currentUser.purchases.push({
-            itemId: item._id,
-            date: Date.now()
+        currentUser.purchases.store.push({
+            customerId:currentUser._id,
+            caseId:currentCase._id,
+            price:currentCase.price,
+            sortedItem: item._id,
         })
         await currentUser.save()
 

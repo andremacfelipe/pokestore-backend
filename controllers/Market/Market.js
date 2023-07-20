@@ -14,7 +14,7 @@ const getItemsForSale = async (req, res) => {
     }
 }
 
-const purchaseForSaleItem = async (userId,marketItemId) => {
+const marketTransaction = async (userId,marketItemId) => {
     const session = await mongoose.startSession()
     try {
         
@@ -91,4 +91,4 @@ const sellItemInTheMarket = async (req,res) => {
     }
 }
 
-export { getItemsForSale, purchaseForSaleItem, sellItemInTheMarket }
+export { getItemsForSale, marketTransaction, sellItemInTheMarket }

@@ -7,7 +7,7 @@ import jsonwebtoken from "jsonwebtoken"
 import { validateRegisterInputs, validateLoginInputs } from "./validate/validateAuthInputs.js"
 
 import { openCase } from "../Case/Case.js"
-import { purchaseForSaleItem } from "../Market/Market.js"
+import { marketTransaction } from "../Market/Market.js"
 
 
 const registerController = async (req, res) => {
@@ -138,7 +138,7 @@ const purchaseMarketItem = async (req,res) => {
 
     try {
         
-        const purchasedItem = await purchaseForSaleItem(userId,itemId)
+        const purchasedItem = await marketTransaction(userId,itemId)
         return res.status(200).json({
             message:"Success!",
             item:purchasedItem

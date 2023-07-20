@@ -35,11 +35,26 @@ const marketTransaction = async (userId,marketItemId) => {
             currentCustomer.credits -= Number(currentItem.market.price)
             currentSeller.credits += Number(currentItem.market.price)
             
+            currentCustomer.purchases.market.push({
+                seller:currentSeller._id,
+                buyer:currentCustomer._id,
+                item:currentItem._id,
+                price:currentItem.market.price
+            })
+            currentSeller.purchases.market.push({
+                seller:currentSeller._id,
+                buyer:currentCustomer._id,
+                item:currentItem._id,
+                price:currentItem.market.price
+            })
+            
 
             currentItem.itemOwner = currentCustomer._id
             currentItem.ownerHistory.push(currentCustomer._id)
             currentItem.market.isForSale = false
             currentItem.market.price = 0
+
+            
 
             
             await currentItem.save()

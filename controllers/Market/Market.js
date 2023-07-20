@@ -60,6 +60,35 @@ const purchaseForSaleItem = async (userId,marketItemId) => {
         session.endSession()
     }
 }
+const sellItemInTheMarket = async (req,res) => {
+    const {userId} = req.body.userData
+    const sellPrice = req.body.sellPrice
+    const itemId = req.params.itemId
+
+    try {
+        const currentUser = await User.findById(userId)
+        const currentItem = await Item.findById(itemId)
+
+        if (currentUser._id != currentItem.itemOwner) {
+            return res.status(400).json({message:"Unauthorized"})
+        } else {
+            currentItem.market.isForSale = true
+            currentItem.market.price = sellPrice
+
+            await currentItem.save()
+
+            return res.status(200).json({
+                message:"Success!",
+                item:currentItem
+            })
+
+        }
 
 
-export { getItemsForSale, purchaseForSaleItem }
+
+    } catch (err) {
+        return res.status(400).json({message:"An error occurred"})
+    }
+}
+
+export { getItemsForSale, purchaseForSaleItem, sellItemInTheMarket }

@@ -61,7 +61,8 @@ const loginController = async (req, res) => {
         const token = await jsonwebtoken.sign({
             userEmail: currentUser.email,
             username: currentUser.username,
-            userId: currentUser._id
+            userId: currentUser._id,
+            userCredits:currentUser.credits,
         },
             process.env.TOKEN_PRIVATE_KEY,
 

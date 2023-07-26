@@ -27,7 +27,7 @@ const userSchema = mongoose.Schema({
         market: [marketPurchaseSchema],
         store: [storePurchaseSchema]
     },
-    credits: { type: Number, default: 100, min: 0 },
+    credits: { type: Number, default: 10000, min: 0 },
     adress: { type: Object, default: {} },
     roles: { type: Array, default: ["user"] },
     createdAt: { type: Date, default: Date.now }

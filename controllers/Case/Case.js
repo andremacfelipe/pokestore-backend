@@ -32,7 +32,8 @@ const openCase = async (userId, caseId) => {
             itemName: Species.pokemonName,
             itemPic: Species.pokemonPicSrc,
             itemOwner: currentUser._id,
-            ownerHistory: [currentUser._id]
+            ownerHistory: [currentUser._id],
+            info:Species.pokemonTypes
         })
         const createdItem = await item.save()
 

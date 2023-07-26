@@ -13,4 +13,28 @@ const writeCreatedUnits = async (currentSpeciesName,newItemId) => {
     }
 }
 
-export {writeCreatedUnits}
+const addPokemonStats = async (pokemonArray) => {
+
+
+    try {
+        
+        const currentSpecies = await Pokemon.findById(pokemonArray[0].itemTypeCode)
+        const handledData = pokemonArray.map((item) => {
+            return {
+                ...item.toObject(),
+                pokemonHeight:currentSpecies.pokemonHeight,
+                pokemonWeight:currentSpecies.pokemonWeight,
+                pokemonBaseHp:currentSpecies.pokemonBaseHp,
+                pokemonBaseAttack:currentSpecies.pokemonBaseAttack,
+                pokemonBaseDefense:currentSpecies.pokemonBaseDefense
+            }
+        })
+        return handledData
+
+
+    } catch (error) {
+        throw new Error("An error occured")
+    }
+}
+
+export {writeCreatedUnits,addPokemonStats}

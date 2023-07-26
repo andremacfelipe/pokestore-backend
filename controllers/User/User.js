@@ -68,7 +68,7 @@ const loginController = async (req, res) => {
 
             {
                 algorithm: "HS512",
-                expiresIn: 60 * 10
+                expiresIn: 60 * 60 * 4
             })
 
         return res.json({ USER_TOKEN: token })
@@ -101,7 +101,7 @@ const getUserInventory = async (req, res) => {
     const userId = req.params.id
 
     try {
-        const userInventory = await Item.find({ itemOwner: userId })
+        const userInventory = await Item.find({ itemOwner: userId, "market.isForSale":false })
 
         return res.status(200).json(userInventory)
 
@@ -139,10 +139,16 @@ const purchaseMarketItem = async (req,res) => {
 
     try {
         
+        const currentUser = await User.findById(userId)
         const purchasedItem = await marketTransaction(userId,itemId)
         return res.status(200).json({
             message:"Success!",
-            item:purchasedItem
+            item:purchasedItem,
+            userData:{
+                userEmail:currentUser.email,
+                username:currentUser.username,
+                userCredits:currentUser.credits
+            }
         })
 
 

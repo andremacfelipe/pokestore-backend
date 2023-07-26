@@ -32,7 +32,8 @@ const openCase = async (userId, caseId) => {
             itemName: Species.pokemonName,
             itemPic: Species.pokemonPicSrc,
             itemOwner: currentUser._id,
-            ownerHistory: [currentUser._id]
+            ownerHistory: [currentUser._id],
+            info:Species.pokemonTypes
         })
         const createdItem = await item.save()
 
@@ -41,9 +42,11 @@ const openCase = async (userId, caseId) => {
         await currentUser.save()
 
         //Add the new purchase to the currentUser
-        currentUser.purchases.push({
-            itemId: item._id,
-            date: Date.now()
+        currentUser.purchases.store.push({
+            customerId:currentUser._id,
+            caseId:currentCase._id,
+            price:currentCase.price,
+            sortedItem: item._id,
         })
         await currentUser.save()
 

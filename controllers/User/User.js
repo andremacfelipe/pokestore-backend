@@ -7,6 +7,7 @@ import jsonwebtoken from "jsonwebtoken"
 import { validateRegisterInputs, validateLoginInputs } from "./validate/validateAuthInputs.js"
 
 import { openCase } from "../Case/Case.js"
+import { marketTransaction } from "../Market/Market.js"
 
 
 const registerController = async (req, res) => {
@@ -60,13 +61,14 @@ const loginController = async (req, res) => {
         const token = await jsonwebtoken.sign({
             userEmail: currentUser.email,
             username: currentUser.username,
-            userId: currentUser._id
+            userId: currentUser._id,
+            userCredits:currentUser.credits,
         },
             process.env.TOKEN_PRIVATE_KEY,
 
             {
                 algorithm: "HS512",
-                expiresIn: 60 * 10
+                expiresIn: 60 * 60 * 4
             })
 
         return res.json({ USER_TOKEN: token })
@@ -99,7 +101,7 @@ const getUserInventory = async (req, res) => {
     const userId = req.params.id
 
     try {
-        const userInventory = await Item.find({ itemOwner: userId })
+        const userInventory = await Item.find({ itemOwner: userId, "market.isForSale":false })
 
         return res.status(200).json(userInventory)
 
@@ -131,6 +133,32 @@ const getItemInfo = async (req, res) => {
 }
 
 
+const purchaseMarketItem = async (req,res) => {
+    const {userId} =  req.body.userData
+    const itemId = req.params.itemId 
+
+    try {
+        
+        const currentUser = await User.findById(userId)
+        const purchasedItem = await marketTransaction(userId,itemId)
+        return res.status(200).json({
+            message:"Success!",
+            item:purchasedItem,
+            userData:{
+                userEmail:currentUser.email,
+                username:currentUser.username,
+                userCredits:currentUser.credits
+            }
+        })
 
 
-export { registerController, loginController, purchaseCase, getUserInventory, getItemInfo }
+    } catch (err) {
+        return res.status(400).json({message:err.message})
+    }
+
+
+}
+
+
+
+export { registerController, loginController, purchaseCase, getUserInventory, getItemInfo,purchaseMarketItem }
